@@ -24,6 +24,7 @@ int brickCount = 16;
 bool isPlaying = false;
 bool isWon = false;
 int p1score = 0;
+int replay = 0;
 bool pHit = false;
 int hitCount = 0;
 sf::Sprite pUp;
@@ -61,6 +62,11 @@ int main()
 	if (!bHitS.loadFromFile("C:/Users/Akshay/source/repos/Test3/Test3/resources/brick.wav"))
 		return EXIT_FAILURE;
 	sf::Sound brickHit(bHitS);
+
+	sf::SoundBuffer thud;
+	if (!thud.loadFromFile("C:/Users/Akshay/source/repos/Test3/Test3/resources/thud.wav"))
+		return EXIT_FAILURE;
+	sf::Sound damage(thud);
 
 	sf::SoundBuffer pHitS;
 	if (!pHitS.loadFromFile("C:/Users/Akshay/source/repos/Test3/Test3/resources/paddle.wav"))
@@ -242,7 +248,7 @@ int main()
 				}
 			}
 			//Check for collision against bricks
-			p1score= manager.BrickCollide(brick,ball,brickHit, p1score, leftPaddle);
+			p1score= manager.BrickCollide(brick,ball,brickHit, p1score, leftPaddle, damage);
 			//Check for bounce against walls
 			manager.WallBounce(ball, gameWidth, gameHeight, ballSound);
 			// Check the collisions between the ball and the paddle
@@ -277,10 +283,17 @@ int main()
 				if (levelCount != changeLev)
 				{
 					//Load New Level
-					brick.resize(16 + levelCount * 8);
+					if (levelCount <= 3)
+					{
+						brick.resize(16 + ((levelCount - 1) * 8));
+					}
+					else
+					{
+						brick.resize(16 + ((levelCount-4) * 8));
+					}
 					fireball = false;
 					manager.Reset(leftPaddle, ball, gameWidth, gameHeight, levelCount, lives);
-					if (levelCount%2 == 0)
+					if (levelCount%3 == 2)
 					{
 						manager.BrickDrawII(brick, gameWidth, gameHeight, brickT2, brickT);
 					}

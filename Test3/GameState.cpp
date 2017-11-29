@@ -20,7 +20,6 @@ void GameState::Reset(Paddle &paddle, Ball &ball, int gameWidth, int gameHeight,
 	ball.SetPosition(nPos);
 	Ball::DynamicParam dp = ball.GetDynamicParameter();
 	dp.ballAngle = -165;
-	dp.ballSpeed = 400.0f;
 	ball.SetDynamicParameter(dp);
 }
 
@@ -79,7 +78,7 @@ void GameState::BrickDrawIII(std::vector<Brick>& bricks, int gameWidth, int game
 {
 	Brick::Position bpos;
 	bpos.y = (gameHeight / 2);
-	bpos.x = 100.0f;
+	bpos.x = 250.0f;
 	for (int i = 0; i < 32; i++)
 	{
 		if (i < 8)
@@ -94,7 +93,7 @@ void GameState::BrickDrawIII(std::vector<Brick>& bricks, int gameWidth, int game
 			brickprop.hitpt = brickprop.hitpt + 1;
 			bricks[i].SetParameter(brickprop);
 			bpos.y = 25.0f+ ((i - 8) * 25);
-			bpos.x = gameWidth/2 ;
+			bpos.x = 400 ;
 		}
 		else if (i >= 16 && i < 24)
 		{
@@ -114,7 +113,7 @@ void GameState::BrickDrawIII(std::vector<Brick>& bricks, int gameWidth, int game
 		bricks[i].SetPosition(bpos);
 	}
 }
-int GameState::BrickCollide(std::vector<Brick>&brick, Ball &ball, sf::Sound &m_brickSound, int score, Paddle &m_paddle)
+int GameState::BrickCollide(std::vector<Brick>&brick, Ball &ball, sf::Sound &m_brickSound, int score, Paddle &paddle, sf::Sound &damage)
 {
 	std::vector<int> hit;
 	std::vector<int> nhit;
@@ -130,7 +129,6 @@ int GameState::BrickCollide(std::vector<Brick>&brick, Ball &ball, sf::Sound &m_b
 			if (brickhit)
 			{
 				brickhit = false;
-				m_brickSound.play();
 				Brick::Parameter bp = brick[i].GetParameter();
 				bp.hitpt = bp.hitpt - 1;
 				Ball::DynamicParam dp = ball.GetDynamicParameter();
@@ -144,21 +142,23 @@ int GameState::BrickCollide(std::vector<Brick>&brick, Ball &ball, sf::Sound &m_b
 				}
 				if (bp.destroyed)
 				{
+					m_brickSound.play();
 					hit.push_back(i);
 					bp.fColor = sf::Color::Black;
 					score = score + 100;
-					if (i > 24 && i % 2 == 1)
+					if (i > 24)
 					{
-						Paddle::Parameter pchange = m_paddle.GetParameter();
-						pchange.pWidth = pchange.pWidth - 25.0f;
-						m_paddle.SetParameter(pchange);
+						Ball::DynamicParam bchange = ball.GetDynamicParameter();
+						bchange.ballSpeed = bchange.ballSpeed + 25.0f;
+						ball.SetDynamicParameter(bchange);
+						Paddle::Parameter pchange = paddle.GetParameter();
+						pchange.pWidth = pchange.pWidth - 7.0f;
+						paddle.SetParameter(pchange);
 					}
-					else if (i > 24 && i % 2 == 0)
-					{
-						Paddle::Parameter pchange = m_paddle.GetParameter();
-						pchange.pWidth = pchange.pWidth + 25.0f;
-						m_paddle.SetParameter(pchange);
-					}
+				}
+				else
+				{
+					damage.play();
 				}
 				brick[i].SetParameter(bp);
 			}
@@ -174,7 +174,7 @@ int GameState::BrickCollide(std::vector<Brick>&brick, Ball &ball, sf::Sound &m_b
 	{
 		br.push_back(brick[nhit[j]]);
 	}
-	if (br.size() > 0 || (score==1600 || score==4000 || score==4800|| score==8000 || score==8800)) // or if it is the last brick find a better way to tell if it's the last brick
+	if (br.size() > 0 || ((score==1600 ||score==8800) || (score==4000 || score==11200) || (score==7200||score==144000))) // or if it is the last brick find a better way to tell if it's the last brick
 	{
 		brick.clear();
 		brick = br;
@@ -273,11 +273,11 @@ void GameState::PaddleCollide(Ball &ball, Paddle &paddle, sf::Sound &m_paddleSou
 		Ball::DynamicParam dp = ball.GetDynamicParameter();
 		if (ball.GetPostion().x <= paddle.GetPostion().x)
 		{
-			dp.ballAngle = -dp.ballAngle+ std::rand() % (85 - 60 + 1) + 60;
+			dp.ballAngle = -dp.ballAngle+75;
 		}
 		else if (ball.GetPostion().x > paddle.GetPostion().x)
 		{
-			dp.ballAngle = -dp.ballAngle - std::rand() % (85 - 60 + 1) + 60;
+			dp.ballAngle = -dp.ballAngle -75;
 		}
 		ball.SetDynamicParameter(dp);
 

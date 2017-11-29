@@ -24,7 +24,7 @@ public:
 	void BrickDrawI(std::vector<Brick>& brick, int gameWidth, int gameHeight);
 	void BrickDrawII(std::vector<Brick>& bricks, int gameWidth, int gameHeight, sf::Texture &brickT1, sf::Texture &brickT);
 	void BrickDrawIII(std::vector<Brick>& bricks, int gameWidth, int gameHeight, sf::Texture &brickT1, sf::Texture &brickT, sf::Texture &brickT3);
-	int BrickCollide(std::vector<Brick>&brick, Ball &ball, sf::Sound &m_brickSound, int score, Paddle &m_paddle);
+	int BrickCollide(std::vector<Brick>&brick, Ball &ball, sf::Sound &m_brickSound, int score, Paddle &paddle, sf::Sound &damage);
 	int ScoreUp();
 private:
 	Paddle m_paddle;
