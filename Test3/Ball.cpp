@@ -1,5 +1,11 @@
 #include"Ball.h"
 
+Ball::Ball()
+{
+	Parameter p;
+	SetParameter(p);
+}
+
 Ball::Ball(const Parameter &p)
 {
 	SetParameter(p);

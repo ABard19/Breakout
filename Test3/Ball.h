@@ -9,8 +9,8 @@ class Ball
 public:
 	struct Parameter
 	{
-		float ballRadius = 10.f;
-		float oThickness = 3.0f;
+		float ballRadius = 12.f;
+		float oThickness = 0.33f;
 		sf::Color oColor=sf::Color::Black;
 		sf::Color fColor = sf::Color::White;
 		float OriginX = ballRadius / 2;
@@ -37,11 +37,11 @@ public:
 	void SetParameter(const Parameter &p);
 	void SetDynamicParameter(const DynamicParam &p);
 	Ball(const Parameter &p);
+	Ball();
 	void Reset();
 	void ChangeAngle(const bool hit);
 	void Move(float oX, float oY);
 	void Draw(sf::RenderWindow* win);
-
 private:
 	sf::CircleShape ball;
 

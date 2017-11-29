@@ -6,8 +6,8 @@ class Paddle
 public:
 	struct Parameter
 	{
-		float pWidth=25;
-		float pHeight = 100;
+		float pWidth=100;
+		float pHeight = 25;
 		float oThickness = 3.0f;
 		sf::Color oColor = sf::Color::Black;
 		sf::Color fColor = sf::Color::White;
@@ -34,6 +34,7 @@ public:
 	void SetParameter(const Parameter &p);
 	void SetDynamicParameter(const DynamicParam &p);
 	Paddle(const Parameter &p);
+	Paddle();
 	void Reset();
 	void Move(float oX, float oY);
 	void CMove(float oX, float oY);

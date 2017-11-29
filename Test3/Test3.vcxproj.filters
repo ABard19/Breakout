@@ -24,6 +24,12 @@
     <ClCompile Include="Paddle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h">
@@ -32,5 +38,56 @@
     <ClInclude Include="Paddle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\ball.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="resources\brick.mp3">
+      <Filter>Resource Files</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\brick.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\def.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\fireball.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\grid.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\main.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\mainmenu.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\maxresdefault.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\plus.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\thegrid.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\font.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="resources\sansation.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
   </ItemGroup>
 </Project>

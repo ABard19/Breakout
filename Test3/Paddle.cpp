@@ -5,6 +5,12 @@ sf::RectangleShape Paddle::GetPaddle() const
 	return paddle;
 }
 
+Paddle::Paddle()
+{
+	Parameter p;
+	SetParameter(p);
+}
+
 Paddle::Paddle(const Parameter &p)
 {
 	SetParameter(p);
@@ -17,7 +23,7 @@ void Paddle::SetParameter(const Parameter &p)
 {
 	m_p = p;
 	paddle.setSize(sf::Vector2f(p.pWidth,p.pHeight));
-	paddle.setOrigin(p.pWidth/2, p.pHeight/2);
+	paddle.setOrigin(p.pWidth/2, p.pHeight);
 	paddle.setOutlineThickness(p.oThickness);
 	paddle.setOutlineColor(p.oColor);
 	paddle.setFillColor(p.fColor);
